@@ -23,7 +23,9 @@ Vue.component('train', {
     currentProject: null
   },
   methods: {
-
+    sleep (time) {
+      return new Promise((resolve) => setTimeout(resolve, time));
+    },
     randomInt(min,max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -56,13 +58,20 @@ Vue.component('train', {
         }
     },
     ok(){
-        if(!this.exists){
-            this.checked.push([this.v1,this.v2]);
-        }
-        this.reload();
+        this.show_result();
+        this.sleep(2000).then(() => {
+            if(!this.exists){
+                this.checked.push([this.v1,this.v2]);
+            }
+            this.reload();
+        });
     },
     bad(){
-        this.reload();
+        this.show_result();
+        this.sleep(2000).then(() => {
+            this.reload();
+        });
+
     },
     show_result(){
         this.text = this.v1 + " x " + this.v2 + " = " + this.result;
@@ -87,7 +96,9 @@ Vue.component('train', {
     <span>{{text}}</span>
     </h3>
   </div>
+
 </div>
+
 
 
             <hr/>
@@ -102,10 +113,10 @@ Vue.component('train', {
             </label>
             <br/>
 
-            <input id="show_result" type="submit" class="mybtn" v-on:click="show_result" >
+            <!--<input id="show_result" type="submit" class="mybtn" v-on:click="show_result" >
             <label for="show_result" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
               Pokaż
-            </label>
+            </label>-->
 
         </div>
     </div>
