@@ -92,12 +92,12 @@ Vue.component('train', {
 
             <hr/>
             <input id="ok" type="submit" class="mybtn" v-on:click="ok" >
-            <label for="ok" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--accent mdl-js-ripple-effect">
+            <label for="ok" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
               Dobrze
             </label>
             <br/>
             <input id="bad" type="submit" class="mybtn" v-on:click="bad" >
-            <label for="bad" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            <label for="bad" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--accent mdl-js-ripple-effect">
               Źle
             </label>
             <br/>
@@ -106,11 +106,6 @@ Vue.component('train', {
             <label for="show_result" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
               Pokaż
             </label>
-
-            
-            <br/>
-            <br/>
-            <div id="logTxt" class="upload-btn-wrapper"></div>
 
         </div>
     </div>
