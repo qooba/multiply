@@ -17,6 +17,7 @@ Vue.component('train', {
       result: 1,
       exists: false,
       checked: [],
+      is_end: false,
     }
   },
   props: {
@@ -32,24 +33,31 @@ Vue.component('train', {
         return Math.floor(Math.random() * (max - min) + min);
     },
     reload() {
-        v1 = this.randomInt(2,9);
-        v2 = this.randomInt(2,9);
+        v1 = this.randomInt(2,10);
+        v2 = this.randomInt(2,10);
 
         this.exists=false;
+
+        //console.log(this.checked.length);
         
-        if(this.checked.length >= 36){
+        if(this.checked.length >= 37){
             this.text = "KONIEC";
+            this.is_end=true;
             return;
         }
 
-        for( const e in this.checked){
-            if((e[0] == v1 && e[1] == v2) || (e[1] == v1 && e[0] == v2)) {
+        
+        for(var i=0;i<this.checked.length;i++){
+            if((this.checked[i][0] == v1 && this.checked[i][1] == v2) || (this.checked[i][1] == v1 && this.checked[i][0] == v2)) {
                 this.exists=true;
+
+                this.reload();
+                console.log(this.checked[i][0],this.checked[i][1], this.checked.length);
+                return;
             }
             
         }
 
-        console.log(this.exists);
         if(!this.exists) {
             this.text = v1+" x "+v2;
             this.result = v1*v2;
@@ -58,8 +66,11 @@ Vue.component('train', {
         }
     },
     ok(){
+        if(this.is_end){
+            return;
+        }
         this.show_result();
-        this.sleep(2000).then(() => {
+        this.sleep(1000).then(() => {
             if(!this.exists){
                 this.checked.push([this.v1,this.v2]);
             }
@@ -67,6 +78,10 @@ Vue.component('train', {
         });
     },
     bad(){
+        if(this.is_end){
+            return;
+        }
+
         this.show_result();
         this.sleep(2000).then(() => {
             this.reload();
@@ -113,10 +128,10 @@ Vue.component('train', {
             </label>
             <br/>
 
-            <!--<input id="show_result" type="submit" class="mybtn" v-on:click="show_result" >
+            <input id="show_result" type="submit" class="mybtn" v-on:click="show_result" >
             <label for="show_result" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
               Pokaż
-            </label>-->
+            </label>
 
         </div>
     </div>
