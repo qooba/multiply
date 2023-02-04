@@ -13,7 +13,7 @@ Vue.component('train', {
       loader: false,
       v1: 1,
       v2: 1,
-      text: "1 x 1",
+      text: "1 : 1",
       result: 1,
       exists: false,
       checked: [],
